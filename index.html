@@ -441,16 +441,6 @@
     }
 
 
-    .manifesto__panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(105deg, transparent 0 48%, rgba(22,168,210,.18) 50%, transparent 52% 100%);
-      transform: translateX(-70%);
-      animation: sweep 7s var(--ease) infinite;
-      opacity: .35;
-    }
-
     .manifesto__text {
       position: relative;
       max-width: 930px;
@@ -498,10 +488,19 @@
       transition: transform .28s var(--ease), border-color .28s var(--ease), background .28s var(--ease);
     }
 
-    .card::before {
+    .card::before,
+    .versus__col::before,
+    .chat::before {
       content: "";
+    }
+
+    .card::before,
+    .versus__col::before,
+    .chat::before,
+    .hover-glow {
       position: absolute;
       inset: -1px;
+      border-radius: inherit;
       background: radial-gradient(circle at var(--mx, 50%) var(--my, 0%), rgba(22,168,210,.18), transparent 35%);
       opacity: 0;
       transition: opacity .28s var(--ease);
@@ -514,7 +513,31 @@
       background: linear-gradient(180deg, rgba(22,168,210,.055), rgba(255,255,255,.03));
     }
 
-    .card:hover::before { opacity: 1; }
+    .step,
+    .versus__col,
+    .chat,
+    .manifesto__panel,
+    .final__box {
+      transition: transform .28s var(--ease), border-color .28s var(--ease);
+    }
+
+    .step:hover,
+    .versus__col:hover,
+    .chat:hover,
+    .manifesto__panel:hover,
+    .final__box:hover {
+      transform: translateY(-4px);
+      border-color: rgba(22,168,210,.38);
+    }
+
+    .versus__col--us:hover {
+      border-color: rgba(22,168,210,.65);
+    }
+
+    .card:hover::before,
+    .versus__col:hover::before,
+    .chat:hover::before,
+    :hover > .hover-glow { opacity: 1; }
 
     .card h3 {
       position: relative;
@@ -638,6 +661,26 @@
     }
 
 
+    .automation__grid {
+      display: grid;
+      grid-template-columns: minmax(320px, .94fr) minmax(0, 1.06fr);
+      align-items: center;
+      gap: clamp(36px, 6vw, 96px);
+    }
+
+    .automation__copy {
+      margin-top: 22px;
+      max-width: 520px;
+      font-size: clamp(1rem, 1.6vw, 1.12rem);
+    }
+
+    .automation__grid .chat {
+      width: 100%;
+      justify-self: start;
+      margin: 0;
+      order: -1;
+    }
+
     .process__rail {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -750,7 +793,7 @@
       position: absolute;
       left: 0;
       top: 10px;
-      color: var(--warn);
+      color: #f87171;
       font-size: .82rem;
     }
 
@@ -840,10 +883,6 @@
     }
 
     @keyframes rotate { to { transform: rotate(360deg); } }
-    @keyframes sweep {
-      0%, 35% { transform: translateX(-80%); }
-      74%, 100% { transform: translateX(80%); }
-    }
 
     @media (max-width: 980px) {
       .nav__links { display: none; }
@@ -857,6 +896,8 @@
       .step h3 { margin-top: 16px; }
       .manifesto__robot { display: none; }
       .versus { grid-template-columns: 1fr; }
+      .automation__grid { grid-template-columns: 1fr; }
+      .automation__grid .chat { order: 0; justify-self: center; margin-top: 8px; max-width: 470px; }
     }
 
     @media (max-width: 680px) {
@@ -942,8 +983,7 @@
         <nav class="nav__links" aria-label="Secciones">
           <a href="#problema">Problema</a>
           <a href="#solucion">Solución</a>
-          <a href="#proceso">Cómo funciona</a>
-          <a href="#diferencia">Diferencia</a>
+          <a href="#proceso">Diferencia</a>
         </nav>
         <a class="nav__cta" href="https://cal.com/keepy">Agenda tu demo</a>
       </div>
@@ -953,8 +993,8 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="container hero__grid">
           <div class="hero__content">
-            <h1 id="hero-title">Tu organización ya tiene las respuestas<span class="accent">.</span></h1>
-            <p class="hero__copy">Inteligencia artificial para ti y tu equipo, que responde al instante usando tus documentos.</p>
+            <h1 id="hero-title">Las respuestas están en tus documentos<span class="accent">.</span></h1>
+            <p class="hero__copy">Inteligencia artificial que responde al instante para ti y tu equipo.</p>
             <div class="hero__actions" aria-label="Acciones principales">
               <a class="btn btn--primary" href="https://cal.com/keepy">Agenda tu demo</a>
               <a class="btn btn--secondary" href="#solucion">Ver cómo funciona</a>
@@ -977,10 +1017,11 @@
       <section class="manifesto" id="problema" aria-labelledby="manifesto-title">
         <div class="container">
           <div class="manifesto__panel">
+            <span class="hover-glow" aria-hidden="true"></span>
             <div class="manifesto__body">
               <p class="eyebrow">El problema</p>
-              <h2 id="manifesto-title" class="manifesto__text">El conocimiento de tu empresa vive en documentos que <span>nadie lee</span>.</h2>
-              <p class="manifesto__sub">Manuales, políticas, contratos, procedimientos… existen, pero en el día a día nadie los abre.</p>
+              <h2 id="manifesto-title" class="manifesto__text">El conocimiento de tu organización vive en documentos que <span>ya existen</span>.</h2>
+              <p class="manifesto__sub">Manuales, contratos, bases de datos… existen, pero en el día a día nadie los accede.</p>
             </div>
             <!-- Icons: Font Awesome Free 6.7.2 (CC BY 4.0) - https://fontawesome.com -->
             <svg class="manifesto__robot" viewBox="0 0 576 512" aria-hidden="true"><path d="M88.7 223.8L0 375.8 0 96C0 60.7 28.7 32 64 32l117.5 0c17 0 33.3 6.7 45.3 18.7l26.5 26.5c12 12 28.3 18.7 45.3 18.7L416 96c35.3 0 64 28.7 64 64l0 32-336 0c-22.8 0-43.8 12.1-55.3 31.8zm27.6 16.1C122.1 230 132.6 224 144 224l400 0c11.5 0 22 6.1 27.7 16.1s5.7 22.2-.1 32.1l-112 192C453.9 474 443.4 480 432 480L32 480c-11.5 0-22-6.1-27.7-16.1s-5.7-22.2 .1-32.1l112-192z"/></svg>
@@ -1002,6 +1043,21 @@
               <h3>El conocimiento se va</h3>
               <p>Cuando un empleado renuncia, se lleva lo que <strong>nunca quedó accesible</strong> para el resto.</p>
             </article>
+            <article class="card">
+              <svg class="card__icon" viewBox="0 0 512 512" aria-hidden="true"><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9L0 168c0 13.3 10.7 24 24 24l110.1 0c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24l0 104c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65 0-94.1c0-13.3-10.7-24-24-24z"/></svg>
+              <h3>Tareas repetitivas</h3>
+              <p>Reportes, resúmenes y recordatorios que alguien arma <strong>a mano, una y otra vez</strong>.</p>
+            </article>
+            <article class="card">
+              <svg class="card__icon" viewBox="0 0 448 512" aria-hidden="true"><path d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>
+              <h3>Los pendientes se olvidan</h3>
+              <p>El seguimiento depende de la memoria de alguien. Y la memoria <strong>falla</strong>.</p>
+            </article>
+            <article class="card">
+              <svg class="card__icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M0 32C0 14.3 14.3 0 32 0L352 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l0 11c0 42.4-16.9 83.1-46.9 113.1L237.3 256l67.9 67.9c30 30 46.9 70.7 46.9 113.1l0 11c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 512c-17.7 0-32-14.3-32-32s14.3-32 32-32l0-11c0-42.4 16.9-83.1 46.9-113.1L146.7 256 78.9 188.1C48.9 158.1 32 117.4 32 75l0-11C14.3 64 0 49.7 0 32zM96 64l0 11c0 25.5 10.1 49.9 28.1 67.9L192 210.7l67.9-67.9c18-18 28.1-42.4 28.1-67.9l0-11L96 64zm0 384l192 0 0-11c0-25.5-10.1-49.9-28.1-67.9L192 301.3l-67.9 67.9c-18 18-28.1 42.4-28.1 67.9l0 11z"/></svg>
+              <h3>Avisos que llegan tarde</h3>
+              <p>Los problemas se detectan cuando <strong>ya son urgencias</strong>, no cuando empezaban.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -1010,7 +1066,7 @@
         <div class="container solution__grid">
           <div class="solution__content">
             <p class="eyebrow">La solución</p>
-            <h2 id="solution-title">Pregunta en Telegram. <span class="accent">Responde tu empresa.</span></h2>
+            <h2 id="solution-title">Pregunta en Telegram. <span class="accent">Responde tu base de conocimiento.</span></h2>
             <p class="section-copy solution__copy">Tu agente lee tus fuentes y después responde a tu equipo, <strong>citando de qué documento salió</strong> cada respuesta.</p>
           </div>
 
@@ -1023,6 +1079,25 @@
             <div class="bubble bubble--bot">Después de 3 años de antigüedad te corresponden <strong>16 días hábiles</strong> de vacaciones, más la prima vacacional del 25%.<span class="bubble__cite">📄 fuente: politica-vacaciones-2026.pdf</span></div>
             <div class="bubble bubble--user">¿Y puedo juntarlas con las del año pasado?</div>
             <div class="bubble bubble--bot">Sí, puedes acumular hasta <strong>6 días</strong> del periodo anterior si lo solicitas antes del 31 de marzo.<span class="bubble__cite">📄 fuente: politica-vacaciones-2026.pdf</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="automation" id="automatiza" aria-labelledby="automation-title">
+        <div class="container automation__grid">
+          <div class="automation__content">
+            <p class="eyebrow">Automatización</p>
+            <h2 id="automation-title">No solo responde. <span class="accent">Ejecuta y automatiza.</span></h2>
+            <p class="section-copy automation__copy">Tu agente también trabaja por su cuenta: prográmalo una vez y él se encarga, <strong>sin que nadie se lo pida</strong>.</p>
+          </div>
+
+          <div class="chat" role="img" aria-label="Ejemplo de mensaje automático que el agente envía al equipo cada lunes">
+            <div class="chat__bar">
+              <div class="chat__avatar">K</div>
+              <div class="chat__who">Asistente · Tu Empresa<small>● en línea</small></div>
+            </div>
+            <div class="bubble bubble--bot">📊 <strong>Resumen semanal</strong> — Buenos días, equipo. La semana pasada se resolvieron <strong>47 consultas</strong>. El tema más consultado: política de viáticos.<span class="bubble__cite">⚡ enviado en automático · cada lunes 9:00</span></div>
+            <div class="bubble bubble--bot">Área de oportunidad: el manual de ventas aún <strong>no cubre devoluciones</strong>. Quedó anotado como pendiente de documentar.</div>
           </div>
         </div>
       </section>
@@ -1067,14 +1142,17 @@
 
           <div class="process__rail">
             <article class="step">
+              <span class="hover-glow" aria-hidden="true"></span>
               <h3>Sube tus documentos</h3>
               <p>PDFs, manuales, políticas, páginas web. Los arrastras al panel y listo.</p>
             </article>
             <article class="step">
+              <span class="hover-glow" aria-hidden="true"></span>
               <h3>Conecta tu bot de Telegram</h3>
               <p>Un bot con el nombre de tu empresa. Sin apps nuevas que instalar ni contraseñas que repartir.</p>
             </article>
             <article class="step">
+              <span class="hover-glow" aria-hidden="true"></span>
               <h3>Aprueba a tu equipo</h3>
               <p>Cada persona pide acceso y tú decides a quién dejar entrar y qué puede consultar.</p>
             </article>
@@ -1119,9 +1197,10 @@
       <section class="final" aria-labelledby="final-title">
         <div class="container">
           <div class="final__box">
+            <span class="hover-glow" aria-hidden="true"></span>
             <p class="eyebrow">El siguiente paso</p>
-            <h2 id="final-title">Deja de repetir respuestas. <span class="accent">Empieza a entregarlas.</span></h2>
-            <p>Trae documentos reales de tu organización y en el demo verás a tu agente responder preguntas de verdad, con tus datos, en vivo.</p>
+            <h2 id="final-title">Tu organización ya tiene lo necesario. <span class="accent">Es hora de que un agente entre en turno.</span></h2>
+            <p>Trae documentos reales y verás a tu agente trabajar de verdad, con tus datos, en vivo.</p>
             <div class="final__actions">
               <a class="btn btn--primary" href="https://cal.com/keepy">Agenda tu demo</a>
             </div>
@@ -1160,7 +1239,7 @@
       }
 
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const cards = document.querySelectorAll('.card');
+      const cards = document.querySelectorAll('.card, .step, .versus__col, .chat, .manifesto__panel, .final__box');
       cards.forEach((card) => {
         card.addEventListener('pointermove', (event) => {
           const rect = card.getBoundingClientRect();
