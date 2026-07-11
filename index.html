@@ -558,20 +558,23 @@
     .card p strong { color: #fff; }
 
 
-    .solution__grid {
+    .solution__grid,
+    .monitor__grid {
       display: grid;
       grid-template-columns: minmax(0, 1.06fr) minmax(320px, .94fr);
       align-items: center;
       gap: clamp(36px, 6vw, 96px);
     }
 
-    .solution__copy {
+    .solution__copy,
+    .monitor__copy {
       margin-top: 22px;
       max-width: 520px;
       font-size: clamp(1rem, 1.6vw, 1.12rem);
     }
 
-    .solution__grid .chat {
+    .solution__grid .chat,
+    .monitor__grid .chat {
       width: 100%;
       justify-self: end;
       margin: 0;
@@ -886,8 +889,8 @@
 
     @media (max-width: 980px) {
       .nav__links { display: none; }
-      .hero__grid, .section-head, .solution__grid { grid-template-columns: 1fr; }
-      .solution__grid .chat { justify-self: center; margin-top: 8px; }
+      .hero__grid, .section-head, .solution__grid, .monitor__grid { grid-template-columns: 1fr; }
+      .solution__grid .chat, .monitor__grid .chat { justify-self: center; margin-top: 8px; }
       .hero { padding-top: 112px; }
       .radar { min-height: 410px; margin-top: 8px; }
       .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -993,7 +996,7 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="container hero__grid">
           <div class="hero__content">
-            <h1 id="hero-title">Las respuestas están en tus documentos<span class="accent">.</span></h1>
+            <h1 id="hero-title">Accede al verdadero poder de tus datos<span class="accent">.</span></h1>
             <p class="hero__copy">Inteligencia artificial que responde al instante para ti y tu equipo.</p>
             <div class="hero__actions" aria-label="Acciones principales">
               <a class="btn btn--primary" href="https://cal.com/keepy">Agenda tu demo</a>
@@ -1098,6 +1101,26 @@
             </div>
             <div class="bubble bubble--bot">📊 <strong>Resumen semanal</strong> — Buenos días, equipo. La semana pasada se resolvieron <strong>47 consultas</strong>. El tema más consultado: política de viáticos.<span class="bubble__cite">⚡ enviado en automático · cada lunes 9:00</span></div>
             <div class="bubble bubble--bot">Área de oportunidad: el manual de ventas aún <strong>no cubre devoluciones</strong>. Quedó anotado como pendiente de documentar.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="monitor" id="monitoreo" aria-labelledby="monitor-title">
+        <div class="container monitor__grid">
+          <div class="monitor__content">
+            <p class="eyebrow">Monitoreo</p>
+            <h2 id="monitor-title">Se entera antes que tú. <span class="accent">Y te avisa.</span></h2>
+            <p class="section-copy monitor__copy">Tu agente vigila tu operación todos los días y te alerta cuando algo necesita atención, <strong>antes de que se vuelva urgencia</strong>.</p>
+          </div>
+
+          <div class="chat" role="img" aria-label="Ejemplo de alerta de monitoreo que el agente envía por Telegram">
+            <div class="chat__bar">
+              <div class="chat__avatar">K</div>
+              <div class="chat__who">Asistente · Tu Empresa<small>● en línea</small></div>
+            </div>
+            <div class="bubble bubble--bot">📬 <strong>Aviso</strong> — Sigue sin llegar el correo con la <strong>cotización de Aceros del Norte</strong> que esperabas para hoy. La prometieron hace 2 días.<span class="bubble__cite">👁 monitoreo activo · revisado hoy 9:00</span></div>
+            <div class="bubble bubble--user">Mándales un recordatorio y avísame cuando respondan.</div>
+            <div class="bubble bubble--bot">Listo, <strong>recordatorio enviado</strong>. Te aviso en cuanto llegue la cotización.</div>
           </div>
         </div>
       </section>
